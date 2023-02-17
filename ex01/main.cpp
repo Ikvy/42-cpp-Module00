@@ -6,7 +6,7 @@
 /*   By: mmidon <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/05 09:23:10 by mmidon            #+#    #+#             */
-/*   Updated: 2023/02/17 08:51:40 by mmidon           ###   ########.fr       */
+/*   Updated: 2023/02/17 09:10:44 by mmidon           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <iostream> 
@@ -16,14 +16,14 @@
 #include "Contact.class.hpp" 
 #include "PhoneBook.class.hpp"
 
-void	check_answer(std::string str)
+void	check_answer(std::string *str)
 {
-	while (str.empty())
+	while (str->empty())
 	{
 		if (std::cin.eof())
 			exit(0);
 		std::cout << "Please, be consistent : ";
-		std::getline(std::cin , str);
+		std::getline(std::cin , *str);
 	}
 }
 
@@ -46,11 +46,12 @@ void	searchId(PhoneBook book)
 	std::string	str;
 	int	id = -1;
 
+	std::cout << "Index choice : ";
 	while (id < 0 || id > 7)
 	{
-		std::cout << "Index choice : ";
+		str.clear();
 		getline(std::cin, str);
-		check_answer(str);
+		check_answer(&str);
 		id = std::stoi(str);
 	}
 	printId(book, id);
@@ -93,23 +94,23 @@ void	add(PhoneBook *book, int *i)
 	(void)book;
 	std::cout << "contact first name : ";
 	std::getline(std::cin, str);
-	check_answer(str);
+	check_answer(&str);
 	newContact.setFstName(str);
 	std::cout << std::endl << "contact last name : ";
 	std::getline(std::cin, str);
-	check_answer(str);
+	check_answer(&str);
 	newContact.setLstName(str);
 	std::cout << std::endl << "contact nickname : ";
 	std::getline(std::cin, str);
-	check_answer(str);
+	check_answer(&str);
 	newContact.setNckName(str);
 	std::cout << std::endl << "contact phone number : ";
 	std::getline(std::cin, str);
-	check_answer(str);
+	check_answer(&str);
 	newContact.setPhone(str);
 	std::cout << std::endl << "contact darkest secret : ";
 	std::getline(std::cin, str);
-	check_answer(str);
+	check_answer(&str);
 	newContact.setSecret(str);
 	if (*i == 8)
 		*i = 0;
